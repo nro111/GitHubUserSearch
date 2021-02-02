@@ -27,6 +27,7 @@ namespace GitHubUserSearch.Core
                 var request = new RestRequest(Method.GET);
                 request.AddHeader("Authorization", $"Basic {base64authorization}");
                 var response = await client.ExecuteAsync(request);
+                Console.WriteLine("response content: " + response.Content);
                 var user = JsonConvert.DeserializeObject<UserModel>(response.Content);
                 Console.WriteLine(user.login);
                 users.Add(user);
