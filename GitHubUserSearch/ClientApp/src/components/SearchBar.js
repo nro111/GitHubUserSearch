@@ -30,7 +30,7 @@ export class SearchBar extends Component {
 
 	fetchSearchResults = (updatedPageNo = '', query) => {
 		const pageNumber = updatedPageNo ? updatedPageNo : '1';
-		const searchUrl = `https://localhost:44384/api/user/name/${query}/page/${pageNumber}`;
+		const searchUrl = `https://github-name-search.herokuapp.com/api/user/name/${query}/page/${pageNumber}`;
 
 		if (this.cancel) {
 			this.cancel.cancel();
