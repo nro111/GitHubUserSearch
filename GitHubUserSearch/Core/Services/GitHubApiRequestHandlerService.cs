@@ -14,6 +14,7 @@ namespace GitHubUserSearch.Core
     {
         public async Task<List<UserModel>> GetUserDataAsync(List<string> usernames)
         {
+            Console.WriteLine(string.Join(',', usernames));
             var users = new List<UserModel>();
             for (var i = 0; i < usernames.Count(); i++)
             {
@@ -27,6 +28,7 @@ namespace GitHubUserSearch.Core
                 request.AddHeader("Authorization", $"Basic {base64authorization}");
                 var response = await client.ExecuteAsync(request);
                 var user = JsonConvert.DeserializeObject<UserModel>(response.Content);
+                Console.WriteLine(user.login);
                 users.Add(user);
             }
             return users;
