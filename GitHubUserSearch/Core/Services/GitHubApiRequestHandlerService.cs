@@ -2,8 +2,10 @@
 using GitHubUserSearch.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GitHubUserSearch.Core
@@ -20,9 +22,9 @@ namespace GitHubUserSearch.Core
                 {
                     Timeout = -1
                 };
+                var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("nro111:ba3fd14bfb19090816382394a17dce8cbd88ada6"));
                 var request = new RestRequest(Method.GET);
-                request.AddHeader("Authorization", "Bearer 3b3024abb64e6961017b08a1d218b1bb13bab679");
-                request.AddHeader("Cookie", "_octo=GH1.1.205917196.1612033113; logged_in=no");
+                request.AddHeader("Authorization", $"Basic {base64authorization}");
                 var response = await client.ExecuteAsync(request);
                 var user = JsonConvert.DeserializeObject<UserModel>(response.Content);
                 users.Add(user);

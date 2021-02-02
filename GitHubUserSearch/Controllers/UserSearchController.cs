@@ -21,14 +21,6 @@ namespace GitHubUserSearch.Controllers
             _gitHubRequestHandler = gitHubRequestHandler;
         }
 
-        //[HttpGet]
-        //[Route("username")]
-        //public async Task<string> GetUsersByUsername(string username)
-        //{
-        //    var searchResult = await _gitHubRequestHandler.GetUserDataAsync(new List<string>() { username });
-        //    return JsonConvert.SerializeObject(searchResult);
-        //}
-
         [HttpGet]
         [Route("name/{name}/page/{page}")]
         public async Task<string> GetUsersByNameAsync(string name, int page)
