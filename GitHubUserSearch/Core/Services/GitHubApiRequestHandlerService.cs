@@ -5,7 +5,6 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GitHubUserSearch.Core
@@ -14,7 +13,6 @@ namespace GitHubUserSearch.Core
     {
         public async Task<List<UserModel>> GetUserDataAsync(List<string> usernames)
         {
-            Console.WriteLine(string.Join(',', usernames));
             var users = new List<UserModel>();
             for (var i = 0; i < usernames.Count(); i++)
             {
@@ -23,13 +21,12 @@ namespace GitHubUserSearch.Core
                 {
                     Timeout = -1
                 };
-                var base64authorization = Convert.ToBase64String(Encoding.ASCII.GetBytes("nro111:ba3fd14bfb19090816382394a17dce8cbd88ada6"));
                 var request = new RestRequest(Method.GET);
-                request.AddHeader("Authorization", $"Basic {base64authorization}");
+                request.AddHeader("Authorization", "Bearer ba3fd14bfb19090816382394a17dce8cbd88ada6");
+                request.AddHeader("Cookie", "_octo=GH1.1.205917196.1612033113; logged_in=no");
                 var response = await client.ExecuteAsync(request);
                 Console.WriteLine("response content: " + response.Content);
                 var user = JsonConvert.DeserializeObject<UserModel>(response.Content);
-                Console.WriteLine(user.login);
                 users.Add(user);
             }
             return users;
